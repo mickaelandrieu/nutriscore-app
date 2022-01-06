@@ -26,3 +26,7 @@ TODO : provide streamlit app and REST endpoint for prediction (we must commit th
 4. (Soon) Execute `src/train.py` to train the model ;
 5. (Soon) Execute `src/app.py` to launch the streamlit app ;
 6. (Sonn) Execute `src/api.py` to get predictions from a REST endpoint ;
+
+## LICENSE
+
+This project is provided under the MIT license.

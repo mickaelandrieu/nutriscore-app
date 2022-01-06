@@ -2,3 +2,4 @@
 # These files are way too heavy for GitHub
 input/
 dev
+!input/.gitkeep
