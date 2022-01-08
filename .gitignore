@@ -1,5 +1,9 @@
-.ipynb_checkpoints/
 # These files are way too heavy for GitHub
 input/
+models/
+
+# Others
+.ipynb_checkpoints/
 dev
 !input/.gitkeep
+src/__pycache__/
