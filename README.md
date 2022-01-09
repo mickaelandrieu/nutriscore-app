@@ -45,8 +45,10 @@ python -m flake8 src/ --count --statistics
 ## Evaluate the performance of the model
 
 ```bash
-python src/report.py
+python src/report.py --fold=1
 ```
+
+> fold value is in range [1,5]
 
 ![report](https://user-images.githubusercontent.com/1247388/148670889-39e3b0c7-c07d-421e-90b2-94a504549d59.JPG)
 
