@@ -42,6 +42,15 @@ python -m black src/
 python -m flake8 src/ --count --statistics
 ```
 
+## Evaluate the performance of the model
+
+```bash
+python src/report.py
+```
+
+![report](https://user-images.githubusercontent.com/1247388/148670889-39e3b0c7-c07d-421e-90b2-94a504549d59.JPG)
+
+
 ## LICENSE
 
 This project is provided under the MIT license.

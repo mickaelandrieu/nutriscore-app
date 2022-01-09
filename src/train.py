@@ -1,7 +1,8 @@
 """Train the data againsts multiple models."""
 
 import argparse
-import os
+
+from os import path
 
 import joblib
 import numpy as np
@@ -43,7 +44,7 @@ def run(fold, model):
     accuracy = metrics.accuracy_score(y_valid, preds)
     console.log("Fold={0}, Accuracy={1}".format(fold, accuracy))
 
-    filepath = os.path.join("{0}dt_{1}.bin".format(config.MODELS, fold))
+    filepath = path.join("{0}{1}_{2}.bin".format(config.MODELS, model, fold))
     joblib.dump(clf, filepath)
 
 
