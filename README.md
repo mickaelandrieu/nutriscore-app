@@ -12,7 +12,20 @@ source dev/Scripts/activate
 pip install -r requirements.txt
 ```
 
-> A Docker file will be provided soon.
+## Basic usage (using Docker)
+
+### Build the image
+
+```bash
+docker build --tag app:1.0 .
+```
+### Enjoy the web application
+
+```bash
+docker run --publish 8501:8501 -it app:1.0
+```
+
+> Everytime you update the project, you must build a new image with a new tag.
 
 ## Train the model
 
