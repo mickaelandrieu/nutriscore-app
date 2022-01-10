@@ -1,0 +1,5 @@
+* [Muesli (rank A)](https://fr.openfoodfacts.org/produit/3168930010265/cruesli-melange-de-noix-quaker)
+* [Ham (rank B)](https://fr.openfoodfacts.org/produit/7613035989535/le-bon-paris-a-letouffee-sans-nitrite-4-tranches-herta)
+* [Moustard (rank C)](https://fr.openfoodfacts.org/produit/3250546610271/moutarde-fine-et-forte-flacon-souple-amora)
+* [Pringles Sour Cream & Onion(rank D)](https://fr.openfoodfacts.org/produit/5053990138753/pringles-sour-cream-onion)
+* [Black chocolate (rank E)](https://fr.openfoodfacts.org/produit/20995553/chocolat-noir-85-cacao-j-d-gross)
