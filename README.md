@@ -48,9 +48,9 @@ python -m flake8 src/ --count --statistics
 python src/report.py --fold=1
 ```
 
-> fold value is in range [1,5]
+> fold value is in range [0,4]
 
-![report](https://user-images.githubusercontent.com/1247388/148670889-39e3b0c7-c07d-421e-90b2-94a504549d59.JPG)
+![report (10th of January, 2022)](https://user-images.githubusercontent.com/1247388/148713711-50f92ccb-6e59-44bf-9e6c-558e86e9a9be.JPG)
 
 
 ## LICENSE

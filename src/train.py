@@ -44,8 +44,8 @@ def run(fold, model):
     accuracy = metrics.accuracy_score(y_valid, preds)
     console.log("Fold={0}, Accuracy={1}".format(fold, accuracy))
 
-    filepath = path.join("{0}{1}_{2}.bin".format(config.MODELS, model, fold))
-    joblib.dump(clf, filepath)
+    filepath = path.join("{0}{1}_{2}.z".format(config.MODELS, model, fold))
+    joblib.dump(clf, filepath, compress=('zlib', 7))
 
 
 if __name__ == "__main__":
