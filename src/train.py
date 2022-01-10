@@ -29,10 +29,10 @@ def run(fold, model):
     df_train = df[df.kfold != fold].reset_index(drop=True)
     df_valid = df[df.kfold == fold].reset_index(drop=True)
 
-    x_train = np.array(df_train.drop("grade", axis="columns"))
+    x_train = np.array(df_train.drop(["grade", "kfold"], axis="columns"))
     y_train = np.array(df_train.grade)
 
-    x_valid = np.array(df_valid.drop("grade", axis="columns"))
+    x_valid = np.array(df_valid.drop(["grade", "kfold"], axis="columns"))
     y_valid = np.array(df_valid.grade)
 
     clf = model_dispatcher.models[model]
@@ -45,7 +45,7 @@ def run(fold, model):
     console.log("Fold={0}, Accuracy={1}".format(fold, accuracy))
 
     filepath = path.join("{0}{1}_{2}.z".format(config.MODELS, model, fold))
-    joblib.dump(clf, filepath, compress=('zlib', 7))
+    joblib.dump(clf, filepath, compress=("zlib", 7))
 
 
 if __name__ == "__main__":

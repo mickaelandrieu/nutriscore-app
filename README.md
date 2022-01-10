@@ -25,7 +25,7 @@ TODO : provide streamlit app and REST endpoint for prediction (we must commit th
 3. Execute `notebooks/feature_encoding_and_selection.ipynb` notebook to transform the data ;
 4. Execute `src/create_folds.py` to prepare data for training ;
 5. Execute `src/train.py` to train the model ;
-5. (Soon) Execute `src/app.py` to launch the streamlit app ;
+5. Execute `streamlit run src/app.py` to launch the Streamlit app ;
 6. (Sonn) Execute `src/api.py` to get predictions from a REST endpoint ;
 
 ## Quality tools
@@ -52,6 +52,13 @@ python src/report.py --fold=1
 
 ![report (10th of January, 2022)](https://user-images.githubusercontent.com/1247388/148713711-50f92ccb-6e59-44bf-9e6c-558e86e9a9be.JPG)
 
+## Test the machine learning model
+
+### Using a Streamlit Web app
+
+```bash
+streamlit run src/app.py
+```
 
 ## LICENSE
 
