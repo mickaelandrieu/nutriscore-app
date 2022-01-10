@@ -14,10 +14,6 @@ pip install -r requirements.txt
 
 > A Docker file will be provided soon.
 
-## Usage
-
-TODO : provide streamlit app and REST endpoint for prediction (we must commit the model.bin).
-
 ## Train the model
 
 1. Download the RAW data on OpenFoodFacts ;
@@ -26,7 +22,7 @@ TODO : provide streamlit app and REST endpoint for prediction (we must commit th
 4. Execute `src/create_folds.py` to prepare data for training ;
 5. Execute `src/train.py` to train the model ;
 5. Execute `streamlit run src/app.py` to launch the Streamlit app ;
-6. (Sonn) Execute `src/api.py` to get predictions from a REST endpoint ;
+6. (Soon) Execute `src/api.py` to get predictions from a REST endpoint ;
 
 ## Quality tools
 
