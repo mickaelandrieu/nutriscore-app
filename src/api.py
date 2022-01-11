@@ -27,7 +27,7 @@ def predict(product: Product):
     """Return ML predictions, see /docs for more information.
 
     Args:
-        product: (Produc) the parsed data from user request
+        product: (Product) the parsed data from user request
 
     Returns:
         A dictionnary with the predicted nutrigrade
