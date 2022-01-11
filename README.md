@@ -22,8 +22,14 @@ docker build --tag app:1.0 .
 ### Enjoy the web application
 
 ```bash
-docker run --publish 8501:8501 -it app:1.0
+docker run --publish 8501:8501 -it app:1.0 -m streamlit run src/app.py
 ```
+
+Then access [http://localhost:8501](http://localhost:8501).
+
+### Enjoy the REST application
+
+> @TODO
 
 > Everytime you update the project, you must build a new image with a new tag.
 

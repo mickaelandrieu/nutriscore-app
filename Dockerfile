@@ -1,8 +1,10 @@
 FROM python:3.9-slim
 
-EXPOSE 8501
+COPY .docker/requirements.txt /
+RUN pip install -r /requirements.txt
+
+COPY . /app
 WORKDIR /app
 
-COPY . .
-RUN pip install -r .docker/requirements.txt
-CMD streamlit run src/app.py
+EXPOSE 8501
+ENTRYPOINT ["python"]
