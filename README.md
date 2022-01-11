@@ -67,7 +67,7 @@ streamlit run src/app.py
 ### Using a REST API
 
 ```bash
-uvicorn src.api:app --reload
+python src/api.py
 ```
 
 ## Quality tools
