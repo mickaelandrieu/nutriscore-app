@@ -2,80 +2,138 @@
 import joblib
 import pandas as pd
 import streamlit as st
+from streamlit_extras.colored_header import colored_header
 
 import config
 
-st.set_page_config(layout="wide")
+# Configuration de la page
+st.set_page_config(
+    page_title="Nutriscore Predictor",
+    page_icon="🥗",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
 
-
-@st.cache
+# Fonctions utilitaires
 def load_categories():
     """Load the list of categories.
 
     Returns:
         a DataFrame.
     """
-    return pd.read_csv("{0}categories.csv".format(config.DOCS))
+    return pd.read_csv(f"{config.DOCS}categories.csv")
 
-
-@st.cache(allow_output_mutation=True)
 def load_model():
-    """Load Machine and returns Learning model.
+    """Load Machine Learning model.
 
     Returns:
         an instance of sklearn classifier.
     """
-    return joblib.load("{0}best_model.z".format(config.MODELS))
+    return joblib.load(f"{config.MODELS}best_model.z")
 
-
-@st.cache
 def load_features():
     """Load the required features for predictions.
 
     Returns:
         a DataFrame
     """
-    return pd.read_csv("{0}best_features.csv".format(config.DOCS))
+    return pd.read_csv(f"{config.DOCS}best_features.csv")
 
-
-@st.cache
 def load_samples():
-    """Load the samples exemples.
+    """Load the samples examples.
 
     Returns:
         a string content as markdown
     """
-    with open("{0}samples.md".format(config.DOCS)) as samples:
+    with open(f"{config.DOCS}samples.md") as samples:
         return samples.read()
 
+# Chargement des données
+@st.cache_data
+def load_data():
+    model = load_model()
+    categories = load_categories()
+    features = load_features()["feature"]
+    return model, categories, features
 
-model = load_model()
-categories = load_categories()
+# Initialisation
+model, categories, features = load_data()
 
-# 1 : get data from User
-features = pd.read_csv("{0}best_features.csv".format(config.DOCS))["feature"]
+# Interface utilisateur
+st.title("🥗 Nutriscore Predictor")
+st.markdown("""
+    Cette application prédit le Nutriscore d'un produit alimentaire en fonction de ses caractéristiques nutritionnelles.
+""")
 
-# App title
-st.title("Nutriscore App predictor")
+# Sidebar avec les informations
+with st.sidebar:
+    st.header("ℹ️ À propos")
+    st.markdown("""
+        Entrez les informations nutritionnelles du produit pour obtenir sa prédiction de Nutriscore.
+    """)
+    
+    with st.expander("Exemples de produits"):
+        st.markdown(load_samples())
 
-with st.expander("Try with product data from OpenFoodsFacts:"):
-    st.markdown(load_samples())
+# Formulaire de saisie
+colored_header(
+    label="📊 Informations nutritionnelles",
+    description="Entrez les valeurs nutritionnelles du produit",
+    color_name="blue-70"
+)
 
-# Organization of the app
-main_block = st.columns([1])
+# Organisation en colonnes pour une meilleure présentation
+col1, col2 = st.columns(2)
 
-energy = st.text_input(label="Energy:", value=0)
+with col1:
+    energy = st.number_input(
+        "Énergie (kcal/100g)",
+        min_value=0.0,
+        value=0.0,
+        step=0.1,
+        help="Énergie en kilocalories pour 100g de produit"
+    )
+    
+    saturated_fat = st.number_input(
+        "Graisses saturées (g/100g)",
+        min_value=0.0,
+        value=0.0,
+        step=0.1,
+        help="Graisses saturées en grammes pour 100g de produit"
+    )
+    
+    sugars = st.number_input(
+        "Sucres (g/100g)",
+        min_value=0.0,
+        value=0.0,
+        step=0.1,
+        help="Sucres en grammes pour 100g de produit"
+    )
 
-saturated_fat = st.text_input(label="Saturated fat:", value=0)
+with col2:
+    salt = st.number_input(
+        "Sel (g/100g)",
+        min_value=0.0,
+        value=0.0,
+        step=0.1,
+        help="Sel en grammes pour 100g de produit"
+    )
+    
+    fibers = st.number_input(
+        "Fibres (g/100g)",
+        min_value=0.0,
+        value=0.0,
+        step=0.1,
+        help="Fibres en grammes pour 100g de produit"
+    )
+    
+    category = st.selectbox(
+        "Catégorie du produit",
+        options=categories,
+        help="Sélectionnez la catégorie du produit"
+    )
 
-sugars = st.text_input(label="Sugars:", value=0)
-
-salt = st.text_input(label="Salt:", value=0)
-
-fibers = st.text_input(label="Fibers:", value=0)
-
-category = st.selectbox(label="Category:", options=categories)
-
+# Préparation des données pour la prédiction
 product = {
     "energy": round(float(energy)),
     "saturated_fat": round(float(saturated_fat)),
@@ -92,19 +150,34 @@ product = {
     "group1_unknown": 0,
 }
 
-# If category is detected then assign the property value to 1.
-formatted_category = "group1_{0}".format(category)
-
-if formatted_category in product.keys():
+# Mise à jour de la catégorie
+formatted_category = f"group1_{category}"
+if formatted_category in product:
     product[formatted_category] = 1
 
-sample = list(product.values())
-
-# Predict the nutrigrade !
-nutrigrade = model.predict([sample])
-
-st.write(
-    "The predicted nutrigrade for this product is : **{0}**".format(
-        nutrigrade[0].upper(),
-    ),
-)
+# Bouton de prédiction
+if st.button("Prédire le Nutriscore", type="primary"):
+    sample = list(product.values())
+    nutrigrade = model.predict([sample])[0].upper()
+    
+    # Affichage du résultat avec style
+    st.markdown("---")
+    colored_header(
+        label="Résultat de la prédiction",
+        description="Le Nutriscore prédit pour ce produit est :",
+        color_name="green-70"
+    )
+    
+    # Affichage stylisé du résultat
+    st.markdown(f"""
+        <div style='text-align: center; font-size: 2em; font-weight: bold; color: #2ecc71;'>
+            {nutrigrade}
+        </div>
+    """, unsafe_allow_html=True)
+    
+    # Informations supplémentaires
+    st.markdown("""
+        <div style='text-align: center; margin-top: 1em;'>
+            <small>Note: Cette prédiction est basée sur un modèle de machine learning et doit être utilisée à titre indicatif.</small>
+        </div>
+    """, unsafe_allow_html=True)

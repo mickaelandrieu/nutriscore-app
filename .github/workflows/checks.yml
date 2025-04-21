@@ -24,8 +24,5 @@ jobs:
         pip install -e .
         pip install -r requirements.txt
  
-    - name: echo "Run Black formatting ✨"
-      run: black src
-
-    - name: echo "Run flake8 📋"
-      run: flake8 --count --show-source --statistics src
+    - name: echo "Run Ruff ✨"
+      run: ruff check .

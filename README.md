@@ -2,7 +2,7 @@
 
 ## How to get the dataset
 
-As the dataset is too big to be shared on GitHub, you must download it on [OpenFoodFacts (products.csv: 4Go)](https://static.openfoodfacts.org/data/en.openfoodfacts.org.products.csv).
+As the dataset is too big to be shared on GitHub, you must download it on [OpenFoodFacts (food.parquet: 3.9Go)](https://huggingface.co/datasets/openfoodfacts/product-database/resolve/main/food.parquet?download=true).
 
 ## Local installation
 
